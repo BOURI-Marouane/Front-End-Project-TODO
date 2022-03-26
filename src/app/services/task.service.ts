@@ -11,9 +11,10 @@ export class TaskService {
   {
     return this.http.post<any>("http://127.0.0.1/rest/Task/ALL",[])
   }
-  delete(id:number)
+  delete([id]:[number])
   {
-    return this.http.post("http://127.0.0.1/rest/Task/delete",[id])
+    console.log(id);
+    return this.http.post<any>("http://127.0.0.1/rest/Task/delete",[id])
   }
 }
   

@@ -22,4 +22,10 @@ export class TasksComponent implements OnInit
       console.log( this.taskss)})
    // this.taskService.findAll().subscribe(tasks => this.tasks = tasks)
   }
+  deleteTask(id:number)
+  {
+    
+    this.taskService.delete([id])
+    .subscribe(()=> {this.taskss = this.taskss.filter(task=>task.ID != id)})
+  }
 }

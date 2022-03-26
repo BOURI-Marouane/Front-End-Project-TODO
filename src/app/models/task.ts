@@ -1,6 +1,6 @@
 export interface Task {
 
-    ID?: number;
+    ID: number;
     task:string;
     startingDate:Date;
     endingDate:Date;
