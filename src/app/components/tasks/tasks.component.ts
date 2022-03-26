@@ -9,6 +9,12 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TasksComponent implements OnInit 
 {
+  myTask : Task = {
+    ID : 0,
+    task:'',
+    done:false,
+    starting:false
+  }
   taskss : Task[] = [];
   constructor(private taskService:TaskService) { }
   ngOnInit()
@@ -28,4 +34,14 @@ export class TasksComponent implements OnInit
     this.taskService.delete([id])
     .subscribe(()=> {this.taskss = this.taskss.filter(task=>task.ID != id)})
   }
+
+  persisteTask()
+  {
+    this.taskService.persiste([this.myTask]).subscribe((task) => {
+      this.taskss = [task, ...this.taskss]
+    });
+  }
+
+
+  
 }

@@ -16,5 +16,10 @@ export class TaskService {
     console.log(id);
     return this.http.post<any>("http://127.0.0.1/rest/Task/delete",[id])
   }
+
+  persiste([task] : [Task])
+  {
+    return this.http.post<any>("http://127.0.0.1/rest/Task/create",[task])
+  }
 }
   

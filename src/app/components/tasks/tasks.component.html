@@ -12,22 +12,23 @@
 <div class="row">
     <div class="col-md-6 mx-auto">
         <div class="form-group">
-            <label for="label">label</label>
-            <input id="label" type="text" class="form-control">
+            <label for="label">Task :</label>
+            <input [(ngModel)] = "myTask.task" id="label" type="text" class="form-control">
         </div>
         <div class="form-check my-2">
           <label class="form-check-label">
-            <input type="checkbox" class="form-check-input">
-            Is done 
+            <input [(ngModel)] = "myTask.done" type="checkbox" class="form-check-input">
+            Done :
           </label>
         </div>
         <div class="form-check my-2">
           <label class="form-check-label">
-            <input type="checkbox" class="form-check-input">
-            Is starting
+            <input [(ngModel)] = "myTask.starting" type="checkbox" class="form-check-input">
+            Starting :
           </label>
         </div>
-        <button class="btn btn-success btn-block"><i class="fa fa-send"></i> New Task</button>
+      
+        <button (click)="persisteTask()" class="btn btn-success btn-block"><i class="fa fa-send"></i> New Task</button>
     </div>
 </div>
 <div class="row">
@@ -42,10 +43,19 @@
                 <span [ngClass]="{
                     'badge-info': task.done,
                     'badge-danger': !task.done
-                }" class="badge badge-danger badge-pill">
+                }" class="badge badge-danger badge-pill"> Done : 
                     <i class="fa" [ngClass]="{
                         'fa-thumbs-up' : task.done,
                         'fa-thumbs-down':!task.done
+                    }"></i>
+                </span>
+                <span [ngClass]="{
+                    'badge-info': task.starting,
+                    'badge-danger': !task.starting
+                }" class="badge badge-danger badge-pill"> starting : 
+                    <i class="fa" [ngClass]="{
+                        'fa-thumbs-up' : task.starting,
+                        'fa-thumbs-down':!task.starting
                     }"></i>
                 </span>
                     <button (click)="deleteTask(task.ID)" class="btn btn-sm btn-dark">
