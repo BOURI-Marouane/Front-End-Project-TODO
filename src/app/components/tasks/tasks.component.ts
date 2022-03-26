@@ -9,6 +9,8 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TasksComponent implements OnInit 
 {
+  showForm = false;
+  editFrom = false;
   myTask : Task = {
     ID : 0,
     task:'',
@@ -38,10 +40,51 @@ export class TasksComponent implements OnInit
   persisteTask()
   {
     this.taskService.persiste([this.myTask]).subscribe((task) => {
-      this.taskss = [task, ...this.taskss]
-    });
+      this.taskss = [task, ...this.taskss];
+      this.resetTask();
+      this.showForm=false;
+    })
   }
 
+  resetTask()
+  {
+    this.myTask = 
+    {
+      ID : 0,
+      task:'',
+      done:false,
+     starting:false
+    }
+  }
 
+  modification( task : Task )
+  {
+    this.taskService.completed([task])
+    .subscribe(() => {
+      task.done = !task.done;
+    })
+  }
+  modificationStarting( task : Task )
+  {
+    this.taskService.completed([task])
+    .subscribe(() => {
+      task.starting = !task.starting;
+    })
+  }
   
+  editTask(task : Task)
+  {
+    this.myTask=task;
+    this.editFrom=true;
+    this.showForm=true;
+  }
+
+  updateTask()
+  {
+    this.taskService.update([this.myTask])
+    .subscribe(() => {
+        this.resetTask();
+        this.editFrom=false;
+    })
+  }
 }
