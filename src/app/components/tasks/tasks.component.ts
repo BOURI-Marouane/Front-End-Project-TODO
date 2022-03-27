@@ -9,15 +9,19 @@ import { TaskService } from 'src/app/services/task.service';
 })
 export class TasksComponent implements OnInit 
 {
+  searchText='';
   showForm = false;
   editFrom = false;
   myTask : Task = {
     ID : 0,
     task:'',
     done:false,
-    starting:false
+    starting:false,
+  
+
   }
   taskss : Task[] = [];
+  resultTaskss : Task[] = [];
   constructor(private taskService:TaskService) { }
   ngOnInit()
   {
@@ -26,8 +30,8 @@ export class TasksComponent implements OnInit
   getTasks()
   {  
     this.taskService.findAll().subscribe( tasks=> { 
-      this.taskss=tasks.__ENTITIES;
-      console.log( this.taskss)})
+      this.resultTaskss = this.taskss=tasks.__ENTITIES;
+      })
    // this.taskService.findAll().subscribe(tasks => this.tasks = tasks)
   }
   deleteTask(id:number)
@@ -54,6 +58,7 @@ export class TasksComponent implements OnInit
       task:'',
       done:false,
      starting:false
+    
     }
   }
 
@@ -86,5 +91,10 @@ export class TasksComponent implements OnInit
         this.resetTask();
         this.editFrom=false;
     })
+  }
+
+  searchTask()
+  {
+    this.resultTaskss=this.taskss.filter((task) => task.task.toLowerCase().includes(this.searchText.toLowerCase()))
   }
 }
