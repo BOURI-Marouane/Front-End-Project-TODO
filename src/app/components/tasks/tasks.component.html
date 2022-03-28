@@ -28,7 +28,7 @@
             Starting :
           </label>
         </div>
-        
+      
     
         <button *ngIf="editFrom" (click)="updateTask()" class="btn btn-warning btn-block">
             <i class="fa fa-refresh"></i> 
@@ -46,7 +46,7 @@
         <input (keyup)="searchTask()" [(ngModel)]="searchText" placeholder="Search..." type="text" class="form-control">
         <ul class="list-group">
             
-            <li *ngFor="let task of resultTaskss" class="list-group-item d-flex justify-content-between align-items-center">
+            <li *ngFor="let task of taskss" class="list-group-item d-flex justify-content-between align-items-center">
                 <button (click) = "editTask(task)" class="btn btn-warning btn-sm">
                     <i class="fa fa-pencil"></i>
                 </button>

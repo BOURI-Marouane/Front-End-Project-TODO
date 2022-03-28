@@ -16,12 +16,12 @@ export class TasksComponent implements OnInit
     ID : 0,
     task:'',
     done:false,
-    starting:false,
-  
+    starting:false
+ 
 
   }
   taskss : Task[] = [];
-  resultTaskss : Task[] = [];
+ 
   constructor(private taskService:TaskService) { }
   ngOnInit()
   {
@@ -29,9 +29,7 @@ export class TasksComponent implements OnInit
   }
   getTasks()
   {  
-    this.taskService.findAll().subscribe( tasks=> { 
-      this.resultTaskss = this.taskss=tasks.__ENTITIES;
-      })
+    this.taskService.findAll().subscribe( tasks=> this.taskss=tasks.__ENTITIES)
    // this.taskService.findAll().subscribe(tasks => this.tasks = tasks)
   }
   deleteTask(id:number)
@@ -58,6 +56,7 @@ export class TasksComponent implements OnInit
       task:'',
       done:false,
      starting:false
+    
     
     }
   }
@@ -95,6 +94,6 @@ export class TasksComponent implements OnInit
 
   searchTask()
   {
-    this.resultTaskss=this.taskss.filter((task) => task.task.toLowerCase().includes(this.searchText.toLowerCase()))
+    this.taskss=this.taskss.filter((task) => task.task.toLowerCase().includes(this.searchText.toLowerCase()))
   }
 }
